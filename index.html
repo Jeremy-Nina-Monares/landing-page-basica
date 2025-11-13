@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machu Picchu Viagens - Descubre el Cusco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #1a3a52;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a3a52;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6ba849;
+        }
+
+        .btn-primary {
+            background: #6ba849;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 168, 73, 0.3);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #1a3a52;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 82, 0.4), rgba(26, 58, 82, 0.4)), 
+                        url('https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1600') center/cover;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #6ba849;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Packages Section */
+        .packages {
+            padding: 5rem 5%;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1a3a52;
+            margin-bottom: 3rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .package-card:nth-child(1) { animation-delay: 0.1s; }
+        .package-card:nth-child(2) { animation-delay: 0.2s; }
+        .package-card:nth-child(3) { animation-delay: 0.3s; }
+        .package-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .package-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .package-info {
+            padding: 1.5rem;
+        }
+
+        .package-info h3 {
+            color: #1a3a52;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-duration {
+            color: #6ba849;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .package-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .package-price {
+            font-size: 1.8rem;
+            color: #6ba849;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn-package {
+            background: #1a3a52;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .btn-package:hover {
+            background: #6ba849;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #6ba849;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #1a3a52;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #6ba849 0%, #1a3a52 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background: #f8f9fa;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a3a52;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6ba849;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: #6ba849;
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 168, 73, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: #1a3a52;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #6ba849;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a3a52;
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        footer .logo {
+            height: 40px;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        footer a {
+            color: #6ba849;
+            text-decoration: none;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 999;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: white;
+                flex-direction: column;
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200'%3E%3Cpath d='M20 150 Q30 100 50 120 T90 140 L110 100 Q120 80 130 90 T150 110 L170 70 Q180 50 190 60 L200 80' fill='%236ba849' opacity='0.8'/%3E%3Cpath d='M10 160 Q25 110 45 130 T85 150 L100 120 Q110 100 120 110 T140 130 L155 100 Q165 80 175 90 L185 110' fill='%236ba849'/%3E%3Ctext x='240' y='100' font-family='Poppins, sans-serif' font-size='80' font-weight='700' fill='%231a3a52'%3EMachu Picchu%3C/text%3E%3Ctext x='240' y='150' font-family='Poppins, sans-serif' font-size='50' fill='%23999' letter-spacing='5'%3Eviagens%3C/text%3E%3Crect x='685' y='130' width='10' height='30' fill='%23e74c3c'/%3E%3Crect x='700' y='130' width='10' height='30' fill='%23e74c3c'/%3E%3C/svg%3E" alt="Machu Picchu Viagens" class="logo">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#paquetes">Paquetes</a></li>
+                <li><a href="#nosotros">Sobre nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="https://wa.me/51987654321" class="btn-primary">Reservar ahora</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Descubre la magia del Cusco con Machu Picchu Viagens</h1>
+            <p>Experiencias únicas, seguras y llenas de historia. Vive Perú con nosotros.</p>
+            <a href="#paquetes" class="btn-secondary">Explorar paquetes</a>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages" id="paquetes">
+        <h2 class="section-title">Nuestros Paquetes Turísticos</h2>
+        <div class="packages-grid">
+            <div class="package-card">
+                <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600" alt="Machu Picchu">
+                <div class="package-info">
+                    <h3>Machu Picchu Clásico</h3>
+                    <p class="package-duration">📅 2 Días / 1 Noche</p>
+                    <p>Explora la maravilla del mundo con guía experto, transporte y hospedaje incluidos.</p>
+                    <div class="package-price">$280</div>
+                    <a href="#contacto" class="btn-package">Más información</a>
+                </div>
+            </div>
+
+            <div class="package-card">
+                <img src="https://www.boletomachupicchu.com/gutblt/wp-content/images/ollantaytambo-sacred-valley-incas.jpg?w=600" alt="Valle Sagrado">
+                <div class="package-info">
+                    <h3>Valle Sagrado de los Incas</h3>
+                    <p class="package-duration">📅 Full Day</p>
+                    <p>Visita Pisac, Ollantaytambo y pueblos tradicionales del Valle Sagrado.</p>
+                    <div class="package-price">$85</div>
+                    <a href="#contacto" class="btn-package">Más información</a>
+                </div>
+            </div>
+
+            <div class="package-card">
+                <img src="https://www.boletomachupicchu.com/gutblt/wp-content/uploads/2018/06/montana-siete-colores-informacion.jpg?w=600" alt="Montaña 7 Colores">
+                <div class="package-info">
+                    <h3>Montaña de 7 Colores</h3>
+                    <p class="package-duration">📅 Full Day</p>
+                    <p>Caminata a la espectacular montaña arcoíris de Vinicunca con desayuno incluido.</p>
+                    <div class="package-price">$65</div>
+                    <a href="#contacto" class="btn-package">Más información</a>
+                </div>
+            </div>
+
+            <div class="package-card">
+                <img src="https://www.intupacusco.com/wp-content/uploads/2020/04/Qoricancha-Cusco.jpg?w=600" alt="Cusco City Tour">
+                <div class="package-info">
+                    <h3>Cusco City Tour</h3>
+                    <p class="package-duration">📅 Medio Día</p>
+                    <p>Conoce la Plaza de Armas, Qoricancha, Sacsayhuamán y más sitios arqueológicos.</p>
+                    <div class="package-price">$45</div>
+                    <a href="#contacto" class="btn-package">Más información</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">Lo que dicen nuestros viajeros</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Una experiencia inolvidable. El guía fue excepcional y nos mostró lugares que jamás hubiéramos descubierto solos. ¡100% recomendado!"</p>
+                <div class="testimonial-author">— María González, España</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Perfecto en organización y atención. El tour a Machu Picchu superó todas mis expectativas. Gracias por hacer realidad mi sueño."</p>
+                <div class="testimonial-author">— João Silva, Brasil</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Profesionales, puntuales y muy amables. La Montaña de 7 Colores fue espectacular. Definitivamente volveremos con más amigos."</p>
+                <div class="testimonial-author">— Sarah Johnson, USA</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="about-content">
+            <h2 class="section-title" style="color: white;">Sobre Nosotros</h2>
+            <p>Somos una agencia cusqueña comprometida en brindar experiencias auténticas, conectando a viajeros con la historia y cultura viva del Perú. Con más de 10 años de experiencia, nuestro equipo de guías locales te llevará a descubrir los secretos mejor guardados de nuestros ancestros incas.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <h2 class="section-title">Contáctanos</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar mensaje</button>
+            </form>
+
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" title="Facebook">f</a>
+                <a href="https://instagram.com" target="_blank" title="Instagram">📷</a>
+                <a href="https://tiktok.com" target="_blank" title="TikTok">♪</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200'%3E%3Cpath d='M20 150 Q30 100 50 120 T90 140 L110 100 Q120 80 130 90 T150 110 L170 70 Q180 50 190 60 L200 80' fill='white' opacity='0.8'/%3E%3Cpath d='M10 160 Q25 110 45 130 T85 150 L100 120 Q110 100 120 110 T140 130 L155 100 Q165 80 175 90 L185 110' fill='white'/%3E%3Ctext x='240' y='100' font-family='Poppins, sans-serif' font-size='80' font-weight='700' fill='white'%3EMachu Picchu%3C/text%3E%3Ctext x='240' y='150' font-family='Poppins, sans-serif' font-size='50' fill='%23ccc' letter-spacing='5'%3Eviagens%3C/text%3E%3Crect x='685' y='130' width='10' height='30' fill='%23e74c3c'/%3E%3Crect x='700' y='130' width='10' height='30' fill='%23e74c3c'/%3E%3C/svg%3E" alt="Machu Picchu Viagens" class="logo">
+        <p>&copy; 2025 Machu Picchu Viagens. Todos los derechos reservados.</p>
+        <p><a href="#">Política de privacidad</a></p>
+    </footer>
+
+    
+
+    <script>
+     
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                verify: { projectID: '6914b443dc2caed3a0f52d3e' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production',
+                voice: {
+                    url: "https://runtime-api.voiceflow.com"
+                }
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+            this.reset();
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.package-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
